@@ -22,4 +22,8 @@ Prop Drilling: The code demonstrates prop drilling, where data is passed from a 
 parent('raj') -> child -> child -> child -> TaskList -> Task -> TaskDetails('Raj')
 
 To avoid prop drilling, you can use React Context or state management libraries like Redux to manage the state globally and provide it to components without having to pass props through multiple levels of the component tree.
+
+useState Hook: The code uses the useState hook to manage state in functional components. For example, in the App component, it uses useState to manage the list of tasks and update it when a new task is added.
+
+useEffect Hook: Although not shown in the provided code snippets, the useEffect hook is commonly used in React to perform side effects such as fetching data, subscribing to events, or updating the DOM. It allows you to run code after the component has rendered and can be used to manage lifecycle events in functional components.
 */
