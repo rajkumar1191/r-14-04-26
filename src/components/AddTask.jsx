@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const AddTask = ({ onAddTask }) => {
+  const inputRef = useRef(null);
   const [taskName, setTaskName] = useState("");
   const [error, setError] = useState(null);
 
@@ -9,13 +10,21 @@ const AddTask = ({ onAddTask }) => {
   }, []);
 
   useEffect(() => {
-    if(taskName.trim()) {
+    const handleScroll = () => console.log(window.scrollY);
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
+
+  useEffect(() => {
+    if (taskName.trim()) {
       console.log("AddTask component mounted");
     }
   }, [taskName, error]);
 
   const handleInputChange = (event) => {
-    console.log("Input changed:", event.target.value);
+    console.log("Input changed:", event.target.value, inputRef?.current);
     setTaskName(event.target.value);
   };
 
@@ -24,8 +33,10 @@ const AddTask = ({ onAddTask }) => {
     if (!taskName.trim()) {
       console.log("Task name is empty. Please enter a valid task name.");
       setError("Task name cannot be empty.");
+      inputRef?.current?.focus();
       return;
     }
+    console.log(inputRef.current.value)
     onAddTask(taskName);
     setTaskName("");
     setError(null);
@@ -42,6 +53,7 @@ const AddTask = ({ onAddTask }) => {
           name="taskName"
           onChange={handleInputChange}
           value={taskName}
+          ref={inputRef}
         />
         <button type="submit">Add Task</button>
       </form>
