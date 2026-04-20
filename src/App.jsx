@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import AddTask from "./components/AddTask";
 import TaskList from "./components/TaskList";
+import TodoApp from "./components/TodoApp";
 
 const App = () => {
   const title = "My Tasks";
@@ -22,6 +23,8 @@ const App = () => {
       <h5>Task Manager</h5>
       <AddTask onAddTask={handleAddTask} />
       <TaskList title={title} taskList={tasks} />
+
+      <TodoApp />
     </>
   );
 }
