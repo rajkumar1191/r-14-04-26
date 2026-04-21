@@ -3,6 +3,7 @@ import "./App.css";
 import AddTask from "./components/AddTask";
 import TaskList from "./components/TaskList";
 import TodoApp from "./components/TodoApp";
+import TodoAppRHF from "./components/TodoAppRHF";
 
 const App = () => {
   const title = "My Tasks";
@@ -25,6 +26,8 @@ const App = () => {
       <TaskList title={title} taskList={tasks} />
 
       <TodoApp />
+
+      <TodoAppRHF />
     </>
   );
 }
