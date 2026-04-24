@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddTask = ({ onAddTask }) => {
   const inputRef = useRef(null);
   const [taskName, setTaskName] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("AddTask component mounted");
@@ -42,6 +44,10 @@ const AddTask = ({ onAddTask }) => {
     setError(null);
   };
 
+  const handleNavigation = (timestamp) => {
+    navigate(`/todo-app/${timestamp}?user=raj&location=home`, { state: { from: "AddTask" } });
+  }
+
   return (
     <div className="add-task">
       <h2>Add New Task</h2>
@@ -57,6 +63,8 @@ const AddTask = ({ onAddTask }) => {
         />
         <button type="submit">Add Task</button>
       </form>
+
+      <button onClick={() => handleNavigation(Date.now())}>Navigate</button>
     </div>
   );
 };

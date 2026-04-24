@@ -1,4 +1,5 @@
 import { useReducer, useState } from "react";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 
 const todoReducer = (state, action) => {
   switch (action.type) {
@@ -23,7 +24,11 @@ const todoReducer = (state, action) => {
 const TodoApp = () => {
   const [text, setText] = useState("");
   const [todos, dispatch] = useReducer(todoReducer, []);
+  const { id } = useParams();
+  const {state} = useLocation();
+  const [searchParams] = useSearchParams();
 
+  console.log("TodoApp rendered with id:", id, "and state:", state, "and search params:", Object.fromEntries(searchParams.entries()));
   const handleAdd = (event) => {
     event.preventDefault();
     dispatch({ type: "ADD_TODO", payload: text });
@@ -32,7 +37,7 @@ const TodoApp = () => {
 
   return (
     <div>
-      <h3>Todo App</h3>
+      <h3>Todo App {id}</h3>
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}

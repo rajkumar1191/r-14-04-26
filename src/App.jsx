@@ -1,35 +1,25 @@
-import { useState } from "react";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Home";
 import AddTask from "./components/AddTask";
-import TaskList from "./components/TaskList";
 import TodoApp from "./components/TodoApp";
 import TodoAppRHF from "./components/TodoAppRHF";
+import Nav from "./components/Nav";
 
 const App = () => {
-  const title = "My Tasks";
-  let taskList = ["Task 1", "Task 2", "Task 3"];
-
-  //const [currentValue, updateFunction] = useState(initialValue);
-  const [tasks, setTasks] = useState(taskList);
-
-  const handleAddTask = (newTask) => {
-    console.log("Adding new task:", newTask);
-    // Logic to add the new task to the task list
-    setTasks([...tasks, newTask]);
-    console.log("Updated task list:", tasks);
-  }
-
   return (
     <>
-      <h5>Task Manager</h5>
-      <AddTask onAddTask={handleAddTask} />
-      <TaskList title={title} taskList={tasks} />
-
-      <TodoApp />
-
-      <TodoAppRHF />
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/add-task" element={<AddTask />} />
+        <Route path="/todo-app" element={<TodoApp />} />
+        <Route path="/todo-app/:id" element={<TodoApp />} />
+        <Route path="/todo-app-rhf" element={<TodoAppRHF />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
+      </Routes>
     </>
   );
-}
+};
 
 export default App;
