@@ -3,6 +3,7 @@
 import { Link } from "react-router-dom";
 
 const Nav = () => {
+  const isAuthenticated = sessionStorage.getItem("isLoggedIn") === "true"; 
 
   // const navigate = useNavigate();
 
@@ -18,8 +19,9 @@ const Nav = () => {
     <nav>
       <Link to="/">Home</Link>
       <Link to="/add-task">Add Task</Link>
-      <Link to="/todo-app">Todo App</Link>
+      {isAuthenticated && <Link to="/todo-app">Todo App</Link>}
       <Link to="/todo-app-rhf">Todo App RHF</Link>
+      <Link to="/dashboard">Dashboard</Link>
     </nav>
   );
 
