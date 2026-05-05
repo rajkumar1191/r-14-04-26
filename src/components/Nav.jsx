@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 // import "./Nav.css";
 import styles from "./Nav.module.css";
 import Button from '@mui/material/Button';
+import { useAuth } from "../hooks/auth";
 
 const Nav = () => {
   const isAuthenticated = sessionStorage.getItem("isLoggedIn") === "true";
 
+  const { user, logout } = useAuth();
   // const navigate = useNavigate();
 
   // useEffect(() => {
@@ -59,9 +61,11 @@ const Nav = () => {
       >
         Dashboard
       </Link>
-      <Button variant="contained" color="success">
-        Success
-      </Button>
+      {user && (
+        <Button variant="contained" color="warning" onClick={logout}>
+          Logout
+        </Button>
+      )}
     </nav>
   );
 };

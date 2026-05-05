@@ -1,10 +1,10 @@
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../hooks/auth";
 
 const ProtectedRoute = ({ children }) => {
+  const { user } = useAuth();
 
-  const isAuthenticated = sessionStorage.getItem("isLoggedIn") === "true"; 
-
-  if (!isAuthenticated) {
+  if (!user) {
     return <Navigate to="/login" />;
   }
 

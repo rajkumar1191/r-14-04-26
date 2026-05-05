@@ -24,3 +24,5 @@ export const useRetryApi = (apiFunction) => {
 
   return { request, loading, error };
 };
+
+// props drilling: passing data through multiple levels of components without using state management libraries.

@@ -3,16 +3,19 @@ import "./Dashboard.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Users from "./Users";
+import { useAuth } from "../hooks/auth";
 
 const Dashboard = () => {
-  const [userData, setUserData] = useState([]);
+  const { user } = useAuth();
+  // const [userData, setUserData] = useState([]);
   const [postData, setPostData] = useState([]);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((data) => {
-        setUserData(data);
+        console.log("User Data:", data);
+        // setUserData(data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -32,6 +35,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>
+      {user ? <p>Welcome, {user.name}!</p> : <p>Loading user info...</p>}
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       {/* {userData.length > 0 ? (
         <div>
