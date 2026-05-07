@@ -8,10 +8,17 @@ import {
 } from "../api/apiService";
 import { useRetryApi } from "../hooks/retryApi";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../store/userSlice";
+
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const user = useSelector((state) => state.user.user);
+  console.log("Redux User State:", user);
+  const dispatch = useDispatch();
 
   const { request } = useRetryApi(() => getUsers());
 
@@ -31,6 +38,9 @@ const Users = () => {
 
   useEffect(() => {
     fetchUsers();
+    setTimeout(() => {
+      dispatch(setUser({ name: "John Doe", email: "johndoe@example.com" }));
+    }, 5000);
   }, []);
 
   const handleCreate = async () => {
@@ -104,7 +114,7 @@ const Users = () => {
         onClick={() => request(2, 2000)} // Example of retrying the API call with custom parameters
         disabled={loading}
       >
-       Retry
+        Retry
       </button>
 
       <button

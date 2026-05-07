@@ -4,22 +4,28 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Users from "./Users";
 import { useAuth } from "../hooks/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUsers } from "../store/userListSlice";
 
 const Dashboard = () => {
   const { user } = useAuth();
   // const [userData, setUserData] = useState([]);
   const [postData, setPostData] = useState([]);
+  const dispatch = useDispatch();
+  const reduxUser = useSelector((state) => state.users);
+  console.log("Redux User State in Dashboard:", reduxUser);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("User Data:", data);
-        // setUserData(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
+    dispatch(fetchUsers());
+    // fetch("https://jsonplaceholder.typicode.com/users")
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     // console.log("User Data:", data);
+    //     // setUserData(data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching user data:", error);
+    //   });
   }, []);
 
   useEffect(() => {
@@ -53,7 +59,7 @@ const Dashboard = () => {
       ) : (
         <p>Loading user data...</p>
       )} */}
-      <Users />
+      {/* <Users /> */}
       <nav>
         <Link to="/dashboard/profile">Profile</Link>
         <Link to="/dashboard/contacts">Contacts</Link>
