@@ -10,6 +10,9 @@ import Profile from "./components/Profile";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import Unauth from "./components/Unauth";
+import RoleRoute from "./routes/RoleRoute";
+import Admin from "./components/Admin";
 
 const App = () => {
 
@@ -30,6 +33,12 @@ const App = () => {
         <Route path="/todo-app/:id" element={<TodoApp />} />
         <Route path="/todo-app-rhf" element={<TodoAppRHF />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/unauthorized" element={<Unauth />} />
+        <Route path="/admin" element={
+          <RoleRoute allowedRoles={['admin']}>
+            <Admin />
+          </RoleRoute>
+        } />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="profile" element={<Profile />} />
           <Route path="contacts" element={<Contact />} />

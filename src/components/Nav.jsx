@@ -3,13 +3,15 @@
 import { Link } from "react-router-dom";
 // import "./Nav.css";
 import styles from "./Nav.module.css";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import { useAuth } from "../hooks/auth";
+import { useAuthV2 } from "../hooks/authV2";
 
 const Nav = () => {
   const isAuthenticated = sessionStorage.getItem("isLoggedIn") === "true";
 
   const { user, logout } = useAuth();
+  const { logoutv2 } = useAuthV2();
   // const navigate = useNavigate();
 
   // useEffect(() => {
@@ -61,8 +63,19 @@ const Nav = () => {
       >
         Dashboard
       </Link>
+      <Link
+        to="/admin"
+        className={!isAuthenticated ? styles.inactiveLink : styles.activeLink}
+      >
+        Admin
+      </Link>
       {user && (
         <Button variant="contained" color="warning" onClick={logout}>
+          Logout
+        </Button>
+      )}
+      {user && (
+        <Button variant="contained" color="warning" onClick={logoutv2}>
           Logout
         </Button>
       )}

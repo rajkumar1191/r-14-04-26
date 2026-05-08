@@ -59,7 +59,7 @@ const Dashboard = () => {
       ) : (
         <p>Loading user data...</p>
       )} */}
-      {/* <Users /> */}
+      <Users />
       <nav>
         <Link to="/dashboard/profile">Profile</Link>
         <Link to="/dashboard/contacts">Contacts</Link>
