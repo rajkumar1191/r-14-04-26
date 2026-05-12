@@ -23,10 +23,11 @@ const Home = () => {
   return (
     <>
       <h5>Task Manager</h5>
+      <TodoApp />
+
       {/* <AddTask onAddTask={handleAddTask} />
       <TaskList title={title} taskList={tasks} />
 
-      <TodoApp />
 
       <TodoAppRHF /> */}
     </>
