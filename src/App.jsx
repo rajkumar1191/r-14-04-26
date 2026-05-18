@@ -14,6 +14,7 @@ import Unauth from "./components/Unauth";
 import RoleRoute from "./routes/RoleRoute";
 import Admin from "./components/Admin";
 import { lazy, Suspense } from "react";
+import Parent from "./components/Parent";
 
 const LoginPage = lazy(() => import("./components/Login"));
 
@@ -45,6 +46,7 @@ const App = () => {
               </RoleRoute>
             }
           />
+          <Route path='/parent' element={<Parent />} />
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="profile" element={<Profile />} />
             <Route path="contacts" element={<Contact />} />

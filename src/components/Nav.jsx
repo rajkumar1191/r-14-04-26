@@ -69,6 +69,12 @@ const Nav = () => {
       >
         Admin
       </Link>
+      <Link
+        to="/parent"
+        className={!isAuthenticated ? styles.inactiveLink : styles.activeLink}
+      >
+        Parent
+      </Link>
       {user && (
         <Button variant="contained" color="warning" onClick={logout}>
           Logout
